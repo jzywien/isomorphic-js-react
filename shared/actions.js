@@ -1,21 +1,24 @@
 import * as Actions from './constants';
 import { push, replace } from 'react-router-redux';
+import fetch from 'isomorphic-fetch';
 
-export const fetchPosts = (subreddit) => (dispatch) => {
+const redditBase = `https://www.reddit.com/r`;
+
+export const fetchPosts = (params) => (dispatch) => {
+  const {subreddit} = params;
   dispatch({
     type: Actions.FETCH_POSTS_REQUEST
   });
 
-  // fetch the posts
-  dispatch({
-    type: Actions.FETCH_POSTS_SUCCESS,
-    subreddit,
-    posts: [{
-      title: 'test post',
-      upvotes: 100
-    }, {
-      title: 'test post 2',
-      upvotes: 100
-    }]
-  });
+  return fetch(`${redditBase}/${subreddit}/.json`)
+    .then(res => res.json())
+    .then(json => {
+      dispatch({
+        type: Actions.FETCH_POSTS_SUCCESS,
+        subreddit,
+        posts: json.data.children.map(post => {
+          return post.data;
+        })
+      });
+    });
 };

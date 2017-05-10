@@ -11,13 +11,15 @@ class Subreddit extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
- static needs = [
+  static needs = [
     Actions.fetchPosts
   ]
 
-  componentDidMount() {
-    // const {appActions} = this.props;
-    // appActions.fetchPosts();
+  componentDidUpdate(prevProps) {
+    const {appActions, subreddit} = this.props;
+    if (subreddit !== prevProps.subreddit) {
+      appActions.fetchPosts({subreddit});
+    }
   }
 
   handleClick() {
@@ -25,8 +27,7 @@ class Subreddit extends React.Component {
   }
 
   render() {
-    const {routeParams, posts} = this.props;
-    const {subreddit} = routeParams;
+    const {subreddit, posts} = this.props;
     return (
       <div onClick={this.handleClick}> Subreddit - {subreddit}
         {posts && posts.map((post, ndx) => (
@@ -39,9 +40,13 @@ class Subreddit extends React.Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => ({
-  posts: state.app.posts,
-});
+const mapStateToProps = (state, {params}) => {
+  const subreddit = params.subreddit || 'all';
+  return {
+    posts: state.app.posts,
+    subreddit
+  }
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {

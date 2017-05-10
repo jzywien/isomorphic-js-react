@@ -3,10 +3,6 @@ import thunk from 'redux-thunk';
 import reducers from './reducers';
 
 const configureStore = (initialState) => {
-  // Load state from local storage
-  // const persistedState = loadState();
-  const persistedState = {};
-
   const rootReducer = combineReducers({
     ...reducers
   });
