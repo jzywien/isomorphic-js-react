@@ -2,6 +2,13 @@
 
 require('babel/register')({});
 
+require.extensions['.scss'] = () => {
+  return;
+};
+require.extensions['.css'] = () => {
+  return;
+};
+
 var server = require('./server');
 
 const PORT = process.env.PORT || 3000;

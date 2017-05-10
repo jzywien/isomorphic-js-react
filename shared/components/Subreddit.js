@@ -27,9 +27,9 @@ class Subreddit extends React.Component {
   }
 
   render() {
-    const {subreddit, posts} = this.props;
+    const {posts} = this.props;
     return (
-      <div onClick={this.handleClick}> Subreddit - {subreddit}
+      <div className='posts'>
         {posts && posts.map((post, ndx) => (
           <Post
             key={ndx}
@@ -40,13 +40,10 @@ class Subreddit extends React.Component {
   }
 }
 
-const mapStateToProps = (state, {params}) => {
-  const subreddit = params.subreddit || 'all';
-  return {
-    posts: state.app.posts,
-    subreddit
-  }
-};
+const mapStateToProps = (state, {params}) => ({
+  posts: state.app.posts,
+  subreddit: params.subreddit || 'all'
+});
 
 const mapDispatchToProps = (dispatch) => {
   return {

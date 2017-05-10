@@ -24,9 +24,14 @@ const posts = (state = [], action) => {
   return state;
 }
 
+const subreddits = (state = [], action) => {
+  return state;
+}
+
 export default {
   app: combineReducers({
     isFetching,
-    posts
+    posts,
+    subreddits
   })
 };

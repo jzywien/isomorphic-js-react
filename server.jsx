@@ -53,6 +53,7 @@ const renderPage = (html, initialState) => {
           <script type="application/javascript">
             window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
           </script>
+          <link rel="stylesheet" href="/styles.css">
         </head>
         <body>
           <div id="root">${html}</div>

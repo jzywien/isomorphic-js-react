@@ -1,6 +1,9 @@
 export default {
   app: {
     isFetching: false,
-    posts: []
+    posts: [],
+    subreddits: [
+      'programming', 'javascript', 'python', 'diy'
+    ]
   }
 };

@@ -1,0 +1,55 @@
+html,
+body,
+#root,
+.app {
+  min-height: 100vh;
+  font-size: 16px;
+  background-color: #eee;
+  font-family: 'Courier New';
+}
+
+.app-scrim {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #333;
+  opacity: .5;
+  cursor: wait;
+}
+
+.post {
+  padding: 1em 0em;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid #ccc;
+  border-bottom: 0px;
+  background-color: white;
+}
+
+.post:last-child {
+  border-bottom: 1px solid #ccc;
+}
+
+.score {
+  padding: 1em;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  width: 50px;
+}
+
+.post-info {
+  padding: .25em;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  font-size: .9em;
+}
+
+.post-info-title {
+  font-size: 1.25em;
+}

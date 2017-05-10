@@ -1,5 +1,6 @@
-var path    = require('path');
+var path = require('path');
 var webpack = require('webpack');
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
   entry:  [
@@ -13,22 +14,24 @@ module.exports = {
   },
   resolve: {
     modulesDirectories: ['node_modules', 'shared'],
-    extensions:         ['', '.js', '.jsx']
+    extensions:         ['', '.js', '.jsx', '.scss', '.css']
   },
   module: {
-    loaders: [
-      {
-        test:    /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: ['react-hot', 'babel']
-      }
-    ]
+    loaders: [{
+      test:    /\.jsx?$/,
+      exclude: /node_modules/,
+      loaders: ['react-hot', 'babel']
+    }, {
+      test: /\.css$/,
+      loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+    }]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new ExtractTextPlugin("styles.css")
   ],
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   devServer: {
     hot: true,
     proxy: {
@@ -37,3 +40,4 @@ module.exports = {
     host: '127.0.0.1'
   }
 };
+
