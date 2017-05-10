@@ -1,7 +1,7 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as appActionCreators from '../actions';
+import * as Actions from '../actions';
 import Post from './Post';
 
 
@@ -11,9 +11,13 @@ class Subreddit extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+ static needs = [
+    Actions.fetchPosts
+  ]
+
   componentDidMount() {
-    const {appActions} = this.props;
-    appActions.fetchPosts();
+    // const {appActions} = this.props;
+    // appActions.fetchPosts();
   }
 
   handleClick() {
@@ -41,7 +45,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    appActions: bindActionCreators(appActionCreators, dispatch)
+    appActions: bindActionCreators(Actions, dispatch)
   };
 }
 

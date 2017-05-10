@@ -1,9 +1,8 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import initialState from './initialState';
 import reducers from './reducers';
 
-const configureStore = () => {
+const configureStore = (initialState) => {
   // Load state from local storage
   // const persistedState = loadState();
   const persistedState = {};

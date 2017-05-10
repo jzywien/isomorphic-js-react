@@ -6,12 +6,14 @@ import createLocation from 'history/lib/createLocation';
 import { Provider } from 'react-redux';
 import routes from 'routes';
 import configureStore from './shared/configureStore';
+import fetchComponentData from './shared/lib/fetchComponentData';
+import initialState from './shared/initialState';
 
 const app = express();
 
 app.use((req, res) => {
   const location = createLocation(req.url);
-  const store = configureStore();
+  const store = configureStore(initialState);
 
   match({ routes, location }, (err, redirect, props) => {
     if (err) {
@@ -20,16 +22,25 @@ app.use((req, res) => {
     }
     if (!props) return res.status(404).end('Not found.');
 
-    const initialState = store.getState();
-    const InitialComponent = (
-      <Provider store={store}>
-        <RouterContext {...props} />
-      </Provider>
-    )
-    const componentHTML = renderToString(InitialComponent);
-    res.send(renderPage(componentHTML, initialState));
+    fetchComponentData(store.dispatch, props.components, props.params)
+      .then(renderView.bind(null, store, props))
+      .then(html => res.send(html))
+      .catch(err => res.send(err.message));
+
   });
 });
+
+const renderView = (store, props) => {
+  const initialState = store.getState();
+  const InitialComponent = (
+    <Provider store={store}>
+      <RouterContext {...props} />
+    </Provider>
+  )
+  const componentHTML = renderToString(InitialComponent);
+
+  return renderPage(componentHTML, initialState);
+}
 
 const renderPage = (html, initialState) => {
   console.log(initialState);
