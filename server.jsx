@@ -1,40 +1,54 @@
 import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server'
-import { RoutingContext, match } from 'react-router';
+import { RouterContext, match } from 'react-router';
 import createLocation from 'history/lib/createLocation';
+import { Provider } from 'react-redux';
 import routes from 'routes';
+import configureStore from './shared/configureStore';
 
 const app = express();
 
 app.use((req, res) => {
   const location = createLocation(req.url);
-  match({ routes, location }, (err, redirectLocation, renderProps) => {
+  const store = configureStore();
+
+  match({ routes, location }, (err, redirect, props) => {
     if (err) {
       console.error(err);
       return res.status(500).end('Internal server error');
     }
-    if (!renderProps) return res.status(404).end('Not found.');
+    if (!props) return res.status(404).end('Not found.');
 
+    const initialState = store.getState();
     const InitialComponent = (
-      <RoutingContext {...renderProps} />
-    );
+      <Provider store={store}>
+        <RouterContext {...props} />
+      </Provider>
+    )
     const componentHTML = renderToString(InitialComponent);
-    const HTML = `
+    res.send(renderPage(componentHTML, initialState));
+  });
+});
+
+const renderPage = (html, initialState) => {
+  console.log(initialState);
+  return `
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="utf-8">
           <title>Isomorphic Redux Demo</title>
+          <script type="application/javascript">
+            window.__INITIAL_STATE__ = ${JSON.stringify(initialState)};
+          </script>
         </head>
         <body>
-          <div id="react-view">${componentHTML}</div>
+          <div id="root">${html}</div>
           <script type="application/javascript" src="/bundle.js"></script>
         </body>
       </html>
-    `;
-    res.end(HTML);
-  });
-});
+  `;
+}
 
 export default app;
