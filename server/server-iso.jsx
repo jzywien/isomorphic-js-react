@@ -2,13 +2,13 @@ import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server'
 import { RouterContext, match } from 'react-router';
-import createLocation from 'history/lib/createLocation';
 import { Provider } from 'react-redux';
-import routes from 'routes';
+import createLocation from 'history/lib/createLocation';
+
+import routes from '../shared/routes';
 import configureStore from '../shared/configureStore';
-import fetchComponentData from '../shared/lib/fetchComponentData';
 import initialState from '../shared/initialState';
-import * as Actions from '../shared/actions';
+import {fetchPosts} from '../shared/actions';
 
 const app = express();
 
@@ -23,7 +23,7 @@ app.use((req, res) => {
     }
     if (!props) return res.status(404).end('Not found.');
 
-    store.dispatch(Actions.fetchPosts(props.params))
+    store.dispatch(fetchPosts(props.params))
       .then(renderView.bind(null, store, props))
       .then(html => res.send(html))
       .catch(err => res.send(err.message));
