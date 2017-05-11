@@ -17,10 +17,6 @@ class Subreddit extends React.Component {
     console.log(`${subreddit} subreddit clicked!`);
   }
 
-  static needs = [
-    Actions.fetchPosts
-  ]
-
   // ISO: Load Application Data when component mounts
   // Data is not loaded on the server side and passed in to client.
   // componentDidMount() {

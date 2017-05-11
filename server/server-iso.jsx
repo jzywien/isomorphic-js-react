@@ -8,6 +8,7 @@ import routes from 'routes';
 import configureStore from '../shared/configureStore';
 import fetchComponentData from '../shared/lib/fetchComponentData';
 import initialState from '../shared/initialState';
+import * as Actions from '../shared/actions';
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.use((req, res) => {
     }
     if (!props) return res.status(404).end('Not found.');
 
-    fetchComponentData(store.dispatch, props.components, props.params)
+    store.dispatch(Actions.fetchPosts(props.params))
       .then(renderView.bind(null, store, props))
       .then(html => res.send(html))
       .catch(err => res.send(err.message));
