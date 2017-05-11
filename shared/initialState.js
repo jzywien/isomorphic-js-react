@@ -3,7 +3,7 @@ export default {
     isFetching: false,
     posts: [],
     subreddits: [
-      'programming', 'javascript', 'python', 'diy'
+      'all', 'programming', 'javascript', 'python', 'diy'
     ]
   }
 };

@@ -4,7 +4,7 @@ import AppContainer from './components/AppContainer';
 import Subreddit from './components/Subreddit'
 
 export default (
-  <Route path='/' component={AppContainer}>
+  <Route path='/' component={Subreddit}>
     <Route path='/r/:subreddit' component={Subreddit}/>
   </Route>
 );

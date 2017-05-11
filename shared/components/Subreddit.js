@@ -1,11 +1,21 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import {Link} from 'react-router';
 import * as Actions from '../actions';
 import Post from './Post';
-
+import '../styles/app.css';
 
 class Subreddit extends React.Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    const {subreddit} = this.props;
+    console.log(`${subreddit} subreddit clicked!`);
+  }
 
   static needs = [
     Actions.fetchPosts
@@ -26,21 +36,42 @@ class Subreddit extends React.Component {
   }
 
   render() {
-    const {posts} = this.props;
+    const {posts, isFetching, subreddit, subreddits, children} = this.props;
+
     return (
-      <div className='posts'>
-        {posts && posts.map((post, ndx) => (
-          <Post
-            key={ndx}
-            post={post} />
-        ))}
+
+      <div className='app'>
+        <h1 onClick={this.handleClick}>{subreddit}</h1>
+
+        {/* show an overlay scrim when fetching data */}
+        {isFetching && (
+          <div className='app-scrim' />
+        )}
+
+        {/* navigation menu */}
+        <nav>
+          <ul>
+            {subreddits.map((sub, ndx) => (
+              <li key={ndx}><Link to={'/r/' + sub}>{sub}</Link></li>
+            ))}
+          </ul>
+        </nav>
+        <div className='posts'>
+          {posts && posts.map((post, ndx) => (
+            <Post
+              key={ndx}
+              post={post} />
+          ))}
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state, {params}) => ({
+  isFetching: state.app.isFetching,
   posts: state.app.posts,
+  subreddits: state.app.subreddits,
   subreddit: params.subreddit || 'all'
 });
 

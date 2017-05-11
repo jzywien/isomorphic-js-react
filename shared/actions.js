@@ -20,5 +20,10 @@ export const fetchPosts = (params) => (dispatch) => {
           return post.data;
         })
       });
+    })
+    .catch(e => {
+      dispatch({
+        type: Actions.FETCH_POSTS_FAILURE
+      });
     });
 };
