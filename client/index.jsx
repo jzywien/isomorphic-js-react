@@ -8,10 +8,10 @@ import configureStore from '../shared/configureStore';
 import { fromJS } from 'immutable';
 
 // ISO: Load Initial state from state passed in from server
-let initialState = window.__INITIAL_STATE__;
+//let initialState = window.__INITIAL_STATE__;
 
 // NON-ISO: Load Initial state from client
-// import initialState from '../shared/initialState';
+import initialState from '../shared/initialState';
 
 const store = configureStore(initialState);
 
