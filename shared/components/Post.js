@@ -6,8 +6,8 @@ const Post = ({post}) => (
       <span>{post.score}</span>
     </div>
     <div className='post-info'>
-      <div className='post-info-title'>
-        <a href={post.url}>{post.title}</a> <span>({post.domain})</span>
+      <div>
+        <a className='post-info-title' href={post.url}>{post.title}</a> <span>({post.domain})</span>
       </div>
       <div>
         <span>submitted by {post.author}</span>

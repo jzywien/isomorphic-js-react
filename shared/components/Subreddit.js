@@ -6,10 +6,6 @@ import Post from './Post';
 
 
 class Subreddit extends React.Component {
-  constructor() {
-    super();
-    this.handleClick = this.handleClick.bind(this);
-  }
 
   static needs = [
     Actions.fetchPosts
@@ -20,10 +16,6 @@ class Subreddit extends React.Component {
     if (subreddit !== prevProps.subreddit) {
       appActions.fetchPosts({subreddit});
     }
-  }
-
-  handleClick() {
-    console.log('test');
   }
 
   render() {

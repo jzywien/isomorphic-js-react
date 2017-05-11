@@ -32,18 +32,16 @@ app.use((req, res) => {
 
 const renderView = (store, props) => {
   const initialState = store.getState();
-  const InitialComponent = (
+  const componentHTML = renderToString(
     <Provider store={store}>
       <RouterContext {...props} />
     </Provider>
-  )
-  const componentHTML = renderToString(InitialComponent);
+  );
 
   return renderPage(componentHTML, initialState);
 }
 
 const renderPage = (html, initialState) => {
-  console.log(initialState);
   return `
       <!DOCTYPE html>
       <html>
