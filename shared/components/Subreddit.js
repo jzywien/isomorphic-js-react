@@ -57,7 +57,7 @@ class Subreddit extends React.Component {
           </ul>
         </nav>
         <div className='posts'>
-          {posts && posts.map((post, ndx) => (
+          {posts.map((post, ndx) => (
             <Post
               key={ndx}
               post={post} />
