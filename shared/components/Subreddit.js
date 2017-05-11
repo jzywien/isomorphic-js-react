@@ -11,6 +11,13 @@ class Subreddit extends React.Component {
     Actions.fetchPosts
   ]
 
+  // ISO: Load Application Data when component mounts
+  // Data is not loaded on the server side and passed in to client.
+  // componentDidMount() {
+  //   const {appActions, subreddit} = this.props;
+  //   appActions.fetchPosts({subreddit});
+  // }
+
   componentDidUpdate(prevProps) {
     const {appActions, subreddit} = this.props;
     if (subreddit !== prevProps.subreddit) {

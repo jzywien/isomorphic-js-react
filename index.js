@@ -6,7 +6,11 @@ require.extensions['.css'] = () => {
   return;
 };
 
-var server = require('./server');
+// ISO: Isomorphic server with Server side rendering
+var server = require('./server-iso');
+
+// NON-ISO: Server just renders static html w/ no SSR
+// var server = require('./server-noniso');
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, function () {

@@ -5,11 +5,20 @@ import {connect} from 'react-redux';
 import '../styles/app.css';
 
 class AppContainer extends React.Component {
+  constructor() {
+    super();
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    console.log('Header Clicked!');
+  }
+
   render() {
     const {isFetching, subreddit, subreddits, children} = this.props;
     return (
       <div className='app'>
-        <h1>{subreddit}</h1>
+        <h1 onClick={this.handleClick}>{subreddit}</h1>
 
         {/* show an overlay scrim when fetching data */}
         {isFetching && (
