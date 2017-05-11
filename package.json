@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_PATH=$NODE_PATH:./shared node --harmony .",
-    "dev": "npm run start & webpack-dev-server --progress --color"
+    "server": "NODE_PATH=$NODE_PATH:./shared node .",
+    "start": "npm run server & webpack-dev-server --progress --color"
   },
   "repository": {
     "type": "git",

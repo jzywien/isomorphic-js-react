@@ -1,13 +1,4 @@
 import express from 'express';
-import React from 'react';
-import { renderToString } from 'react-dom/server'
-import { RouterContext, match } from 'react-router';
-import createLocation from 'history/lib/createLocation';
-import { Provider } from 'react-redux';
-import routes from 'routes';
-import configureStore from './shared/configureStore';
-import fetchComponentData from './shared/lib/fetchComponentData';
-import initialState from './shared/initialState';
 
 const app = express();
 

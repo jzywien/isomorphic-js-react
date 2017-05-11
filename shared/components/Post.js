@@ -7,7 +7,7 @@ const Post = ({post}) => (
     </div>
     <div className='post-info'>
       <div>
-        <a className='post-info-title' href={post.url}>{post.title}</a> <span>({post.domain})</span>
+        <a target='_blank' className='post-info-title' href={post.url}>{post.title}</a> <span>({post.domain})</span>
       </div>
       <div>
         <span>submitted by {post.author}</span>

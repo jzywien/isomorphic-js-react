@@ -5,7 +5,6 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
   entry:  [
     'webpack-dev-server/client?http://127.0.0.1:8080/',
-    'webpack/hot/only-dev-server',
     './client'
   ],
   output: {
@@ -20,20 +19,18 @@ module.exports = {
     loaders: [{
       test:    /\.jsx?$/,
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel']
+      loaders: ['babel']
     }, {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract("style-loader", "css-loader")
     }]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new ExtractTextPlugin("styles.css")
   ],
   devtool: 'source-map',
   devServer: {
-    hot: true,
     proxy: {
       '*': 'http://127.0.0.1:' + (process.env.PORT || 3000)
     },
