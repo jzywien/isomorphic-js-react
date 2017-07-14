@@ -11,20 +11,25 @@ body,
 .header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 }
 
-nav {
-  flex: 1;
+.header h1 {
+  flex-grow: 1;
 }
 
 nav ul {
   display: flex;
   list-style: none;
-  justify-content: flex-end;
+  padding: 0;
 }
 
 nav ul li {
-  margin-left: 1em;
+  margin-right: 1em;
+}
+
+nav ul li:last-child {
+  margin-right: 0;
 }
 
 .app-scrim {
