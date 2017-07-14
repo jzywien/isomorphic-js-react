@@ -37,21 +37,23 @@ class Subreddit extends React.Component {
     return (
 
       <div className='app'>
-        <h1 onClick={this.handleClick}>{subreddit}</h1>
-
         {/* show an overlay scrim when fetching data */}
         {isFetching && (
           <div className='app-scrim' />
         )}
 
-        {/* navigation menu */}
-        <nav>
-          <ul>
-            {subreddits.map((sub, ndx) => (
-              <li key={ndx}><Link to={'/r/' + sub}>{sub}</Link></li>
-            ))}
-          </ul>
-        </nav>
+        <div className='header'>
+          <h1 onClick={this.handleClick}>{subreddit}</h1>
+
+          {/* navigation menu */}
+          <nav>
+            <ul>
+              {subreddits.map((sub, ndx) => (
+                <li key={ndx}><Link to={'/r/' + sub}>{sub}</Link></li>
+              ))}
+            </ul>
+          </nav>
+        </div>
         <div className='posts'>
           {posts.map((post, ndx) => (
             <Post
