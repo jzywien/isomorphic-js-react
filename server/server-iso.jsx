@@ -23,7 +23,8 @@ app.use((req, res) => {
     }
     if (!props) return res.status(404).end('Not found.');
 
-    store.dispatch(fetchPosts(props.params))
+    const {subreddit} = props.params;
+    store.dispatch(fetchPosts(subreddit))
       .then(renderView.bind(null, store, props))
       .then(html => res.send(html))
       .catch(err => res.send(err.message));
