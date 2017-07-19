@@ -4,8 +4,9 @@ import fetch from 'isomorphic-fetch';
 
 const redditBase = `https://www.reddit.com/r`;
 
-export const fetchPosts = (params) => (dispatch) => {
-  const {subreddit} = params;
+export const fetchPosts = (subreddit) => (dispatch) => {
+  subreddit = subreddit || 'all';
+
   dispatch({
     type: Actions.FETCH_POSTS_REQUEST
   });

@@ -21,13 +21,13 @@ class Subreddit extends React.Component {
   // Data is not loaded on the server side and passed in to client.
   // componentDidMount() {
   //   const {appActions, subreddit} = this.props;
-  //   appActions.fetchPosts({subreddit});
+  //   appActions.fetchPosts(subreddit);
   // }
 
   componentDidUpdate(prevProps) {
     const {appActions, subreddit} = this.props;
     if (subreddit !== prevProps.subreddit) {
-      appActions.fetchPosts({subreddit});
+      appActions.fetchPosts(subreddit);
     }
   }
 
